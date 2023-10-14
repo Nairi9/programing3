@@ -1,0 +1,23 @@
+{
+  "name": "programing3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cnox.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nairi9/programing3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nairi9/programing3/issues"
+  },
+  "homepage": "https://github.com/Nairi9/programing3#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
