@@ -1,4 +1,7 @@
-class Grass extends Cnox {
+var Cnox = require('./cnox')
+let random = require("./random");
+
+module.exports = class Grass extends Cnox {
     constructor(x, y, index) {
         super(x, y, index)
         this.multiply = 0;

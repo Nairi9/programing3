@@ -1,4 +1,4 @@
-class Cnox {
+module.exports = class Cnox {
     constructor(x, y, index) {
         this.x = x;
         this.y = y;

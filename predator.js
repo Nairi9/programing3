@@ -1,4 +1,7 @@
-class Predator extends Cnox{
+var Cnox = require('./cnox')
+let random = require("./random");
+
+module.exports = class Predator extends Cnox{
     constructor(x, y, index) {
         super(x, y, index)
         this.energy = 90

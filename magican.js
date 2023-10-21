@@ -1,4 +1,6 @@
-class Magican extends Cnox {
+var Cnox = require('./cnox')
+let random = require("./random");
+module.exports = class Magican extends Cnox {
     constructor(x, y, index) {
         super(x, y, index)
         this.directions = [];

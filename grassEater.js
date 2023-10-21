@@ -1,4 +1,7 @@
-class GrassEater extends Cnox  {
+var Cnox = require('./cnox')
+let random = require("./random");
+
+module.exports = class GrassEater extends Cnox  {
     constructor(x, y, index) {
         super(x, y, index)
         this.energy = 5
