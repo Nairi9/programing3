@@ -20,6 +20,8 @@ var GrassEater = require('./grassEater')
 var Magican = require('./magican')
 var MagicanEater = require('./magicanEater')
 var Predator = require('./predator')
+var Blocker = require('./blocker')
+var Kaycak = require('./kaycak')
 
 matrix = [];
 side = 10;
@@ -30,6 +32,8 @@ grassEaterArr = []
 predatorArr = []
 magicanArr = []
 magicanEaterArr = []
+blockerArr = []
+kaycakArr = []
 
 
 function createMatrix() {
@@ -52,6 +56,12 @@ function createMatrix() {
     characters(3, 5)
     characters(4, 3)
     characters(5, 10)
+    characters(6, 1)
+
+
+
+
+
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 1) {
@@ -74,11 +84,14 @@ function createMatrix() {
                 let magicanEater = new MagicanEater(x, y, 5)
                 magicanEaterArr.push(magicanEater)
             }
+            else if (matrix[y][x] == 6) {
+                let blocker = new Blocker(x, y, 6)
+                blockerArr.push(blocker)
+            }
         }
     }
 }
 
-createMatrix()
 
 function playGame() {
     for (let i in grassArr) {
@@ -96,9 +109,39 @@ function playGame() {
     for (let i in magicanEaterArr) {
         magicanEaterArr[i].move()
     }
+    for (let i in blockerArr) {
+        blockerArr[i].move()
+    }
+    for (let i in kaycakArr) {
+        kaycakArr[i].move()
+    }
     io.emit('MATRIX', matrix)
 }
 
-setInterval(function () {
-    playGame()
-}, 1000)
+
+function addKaycak() {
+    var v = Math.floor(random(50))
+    var w = Math.floor(random(50))
+    matrix[v][w] = 7;
+    if (matrix[v][w] == 7) {
+        let kaycak = new Kaycak(v, w, 7)
+        kaycakArr.push(kaycak)
+    }
+
+
+
+}
+
+io.on("connection", function (socket) {
+    createMatrix()
+    socket.emit("MATRIX", matrix)
+    socket.on("Kaycak", function () {
+        addKaycak()
+        io.emit('MATRIX')
+    })
+    setInterval(function () {
+        playGame()
+    }, 1000)
+})
+
+
