@@ -33,7 +33,7 @@ module.exports = class Blocker extends Cnox {
             this.x = newX
             this.y = newY
         }
-        
+
 
     }
 }

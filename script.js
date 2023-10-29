@@ -1,8 +1,8 @@
 socket = io();
-var side = 20,m = 40, n = 40;
+var side = 20, m = 40, n = 40;
 var matrix = []
 
-let colors = { 
+let colors = {
     grey: "grey",
     green: "white",
     yellow: "yellow",
@@ -10,21 +10,22 @@ let colors = {
     purple: "purple",
     blue: "blue",
     black: "black",
-    deepskyblue	: "deepskyblue"	
+    deepskyblue: "deepskyblue"
 }
 let my_btn = document.getElementById("btn")
 let my_kaycak = document.getElementById("kaycak")
 
 my_btn.addEventListener("click", changeColor)
-my_kaycak = document.addEventListener("click", kaycak)
+my_kaycak.addEventListener("click", kaycak);
 
-function kaycak(){
-socket.emit("Kaycak")
+
+function kaycak() {
+    socket.emit("Kaycak")
 }
 
-function changeColor(){
-    if(colors.green === "green" ){
-        colors = { 
+function changeColor() {
+    if (colors.green === "green") {
+        colors = {
             grey: "grey",
             green: "white",
             yellow: "yellow",
@@ -32,37 +33,37 @@ function changeColor(){
             purple: "purple",
             blue: "blue",
             black: "black",
-            deepskyblue	: "deepskyblue"	
+            deepskyblue: "deepskyblue"
         }
     }
-        else if(colors.green === "white" ){
-            colors = { 
-                grey: "grey",
-                green: "green",
-                yellow: "yellow",
-                red: "red",
-                purple: "purple",
-                blue: "blue",
-                black: "black",
-                deepskyblue	: "deepskyblue"	
-            }
+    else if (colors.green === "white") {
+        colors = {
+            grey: "grey",
+            green: "green",
+            yellow: "yellow",
+            red: "red",
+            purple: "purple",
+            blue: "blue",
+            black: "black",
+            deepskyblue: "deepskyblue"
         }
-            else {
-                colors = { 
-                    grey: "grey",
-                    green: "green",
-                    yellow: "yellow",
-                    red: "red",
-                    purple: "purple",
-                    blue: "blue",
-                    black: "black",
-                    deepskyblue	: "deepskyblue"	
+    }
+    else {
+        colors = {
+            grey: "grey",
+            green: "green",
+            yellow: "yellow",
+            red: "red",
+            purple: "purple",
+            blue: "blue",
+            black: "black",
+            deepskyblue: "deepskyblue"
 
-                }
-            }
         }
-        
-            
+    }
+}
+
+
 
 
 
@@ -101,20 +102,41 @@ function draw(m) {
                 fill(colors.black);
             }
             if (matrix[y][x] == 7) {
-                fill(colors.deepskyblue	);
+                fill(colors.deepskyblue);
             }
             rect(x * side, y * side, side, side);
         }
     }
 }
 
-socket.on('MATRIX', (m)=>{
-matrix = m
+socket.on('MATRIX', (m) => {
+    matrix = m
 })
 
-socket.on('MATRIX', (m)=>{
-  draw(m)
-    })
+socket.on('MATRIX', (m) => {
+    draw(m)
+})
+socket.on('STATS', (stats) => {
+
+    const statsElement = document.getElementById('stats');
+
+
+    statsElement.innerHTML = `Grasses Count: ${stats.grassCount}`;
+
+});
+socket.on('GRASS_EATER_STATS', (stats) => {
+
+    const grassEaterStatsElement = document.getElementById('grassEaterStats');
+    grassEaterStatsElement.innerHTML = `GrassEaters Count: ${stats.grassEaterCount}`;
+
+});
+
+socket.on('PREDATOR_STATS', (stats) => {
+
+    const predatorStatsElement = document.getElementById('predatorStats');
+    predatorStatsElement.innerHTML = `Predators Count: ${stats.predatorCount}`;
+
+});
 
 
 

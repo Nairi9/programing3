@@ -35,6 +35,31 @@ magicanEaterArr = []
 blockerArr = []
 kaycakArr = []
 
+function getGrassStatistics() {
+    let grassCount = grassArr.length;
+
+    return {
+        grassCount: grassCount,
+
+    };
+}
+function getGrassEaterStatistics() {
+    let grassEaterCount = grassEaterArr.length;
+
+    return {
+        grassEaterCount: grassEaterCount,
+
+    };
+}
+
+function getPredatorStatistics() {
+    let predatorCount = predatorArr.length;
+
+    return {
+        predatorCount: predatorCount,
+
+    };
+}
 
 function createMatrix() {
     for (let i = 0; i < n; i++) {
@@ -97,6 +122,14 @@ function playGame() {
     for (let i in grassArr) {
         grassArr[i].mul()
     }
+    const grassStats = getGrassStatistics();
+    const grassEaterStats = getGrassEaterStatistics();
+    const predatorStats = getPredatorStatistics();
+
+
+
+    io.emit('MATRIX', matrix);
+    io.emit('STATS', grassStats);
     for (let i in grassEaterArr) {
         grassEaterArr[i].eat()
     }
@@ -116,6 +149,8 @@ function playGame() {
         kaycakArr[i].move()
     }
     io.emit('MATRIX', matrix)
+    io.emit('GRASS_EATER_STATS', grassEaterStats);
+    io.emit('PREDATOR_STATS', predatorStats);
 }
 
 
